@@ -1,0 +1,5 @@
+/home/sgwps/Desktop/sem3_14/bin/Debug/net6.0/publish/sem3_14
+/home/sgwps/Desktop/sem3_14/bin/Debug/net6.0/publish/sem3_14.dll
+/home/sgwps/Desktop/sem3_14/bin/Debug/net6.0/publish/sem3_14.deps.json
+/home/sgwps/Desktop/sem3_14/bin/Debug/net6.0/publish/sem3_14.runtimeconfig.json
+/home/sgwps/Desktop/sem3_14/bin/Debug/net6.0/publish/sem3_14.pdb
