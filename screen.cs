@@ -18,7 +18,7 @@ class Screen<T>
             Console.ReadLine()
         );
 
-        (new Screen<T>(_array.Where<T>(selector.ItemChecker).ToArray<T>())).Iterate();
+        (new Screen<T>(_array.Where<T>(selector.ItemChecker).ToArray<T>(), _actions)).Iterate();
     }
 
     /// <summary>
