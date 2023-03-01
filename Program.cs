@@ -1,7 +1,7 @@
 ﻿class Program{
 
     static void FileParceInterface(out FileRecord[] array){
-        while (!(FileRecord.ParseFileCSV("abcnews-date-text-short.csv", out array))){
+        while (!(FileRecord.ParseFileCSV("abcnews-date-text.csv", out array))){
             Console.WriteLine("Error occured. File not parced.");
             Console.Write("Enter y to continue: ");
             ConsoleKey key = Console.ReadKey().Key;
@@ -19,16 +19,18 @@
 
     static void Main(){
         FileParceInterface(out FileRecord[] array);
-        SortingParameter<FileRecord>[] par = new SortingParameter<FileRecord>[] {
-            new SortingParameter<FileRecord>("by date", ConsoleKey.D, (x, y) => x.Date.CompareTo(y.Date)),
-            new SortingParameter<FileRecord>("by name", ConsoleKey.N, (x, y) => x.Name.CompareTo(y.Name))
+
+
+        IScreenAction[] actions = new IScreenAction[] {
+            new SortingOption<FileRecord>((x, y) => x.Date.CompareTo(y.Date), new MenuOption(ConsoleKey.D, "sort by date")),
+            new SortingOption<FileRecord>((x, y) => x.Name.CompareTo(y.Name), new MenuOption(ConsoleKey.N, "sort by name")),
+            new SelectingOption<FileRecord, string>((x, y) => x.Name.Split(" ").Contains(y), i => i, new MenuOption(ConsoleKey.F, "find by name"), "enter the key word"),
+            new SelectingOption<FileRecord, DateOnly>((x, y) => x.Date.Month == y.Month & x.Date.Year == y.Year, i => new DateOnly(int.Parse(i[..4]), int.Parse(i[4..6]), 1), new MenuOption(ConsoleKey.U, "find by date"), "Enter month in format YYYYMM")
+
         };
         
-        Validator<FileRecord>[] val = new Validator<FileRecord>[]{
-            new FinderParameter<FileRecord, string> ( (i, val) => i.Name.Contains(val), i => i, "Enter value:")
-        };
 
-        (new Screen<FileRecord>(array, val)).Iterate();
+        (new Screen<FileRecord>(array, actions)).Iterate();
 
 
     }
