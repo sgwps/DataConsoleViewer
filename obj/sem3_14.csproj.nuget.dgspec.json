@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/sgwps/Desktop/sem3_14/sem3_14.csproj": {}
+    "/home/sgwps/Desktop/C_sharp/sem3_14/sem3_14.csproj": {}
   },
   "projects": {
-    "/home/sgwps/Desktop/sem3_14/sem3_14.csproj": {
+    "/home/sgwps/Desktop/C_sharp/sem3_14/sem3_14.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/sgwps/Desktop/sem3_14/sem3_14.csproj",
+        "projectUniqueName": "/home/sgwps/Desktop/C_sharp/sem3_14/sem3_14.csproj",
         "projectName": "sem3_14",
-        "projectPath": "/home/sgwps/Desktop/sem3_14/sem3_14.csproj",
+        "projectPath": "/home/sgwps/Desktop/C_sharp/sem3_14/sem3_14.csproj",
         "packagesPath": "/home/sgwps/.nuget/packages/",
-        "outputPath": "/home/sgwps/Desktop/sem3_14/obj/",
+        "outputPath": "/home/sgwps/Desktop/C_sharp/sem3_14/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/sgwps/.nuget/NuGet/NuGet.Config"
@@ -52,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.113/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.116/RuntimeIdentifierGraph.json"
         }
       }
     }

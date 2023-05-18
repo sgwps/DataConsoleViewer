@@ -1,45 +1,20 @@
 using System.Reflection;
 using System.Text.Json;
+using DataConsoleViewer.ScreenActions;
 
 class Screen<T>
 {
-    IScreenAction[] _actions = new IScreenAction[] { };
+    IScreenAction<T>[] _actions = new IScreenAction<T>[] { };
 
     /// <summary>
     /// Cписок объектов, с которыми работает программа
     /// <summary/>
     T[] _array;
 
-    public void Select<U>(ISelector<T> selectorOption)
-    {
-        Console.Write(selectorOption.Instruction);
-        Selector<T, U> selector = new Selector<T, U>(
-            (SelectingOption<T, U>)selectorOption,
-            Console.ReadLine()
-        );
-
-        (new Screen<T>(_array.Where<T>(selector.ItemChecker).ToArray<T>(), _actions)).Iterate();
-    }
-
-    /// <summary>
-    /// Вывод отсортировнных объектов на экран
-    /// <summary/>
-    void PrintSorted(Comparison<T> comp)
-    {
-        T[] arrayNew = new T[ScreenEnd - _first];
-        for (int i = First; i < ScreenEnd; i++)
-        {
-            arrayNew[i - First] = _array[i];
-        }
-        Array.Sort<T>(arrayNew, comp);
-        foreach (T i in arrayNew)
-        {
-            Console.WriteLine(i);
-        }
-        if (EndFlag)
-        {
-            Console.WriteLine("You reached the end of the file");
-        }
+    
+    public void HandleAction(IScreenAction<T> action) {
+        T[] newArray = action.HandleData(_array);
+        (new Screen<T>(newArray, _actions)).Iterate();
     }
 
     /// <param name="arr">Список объектов для работы в консоли</param>
@@ -48,7 +23,7 @@ class Screen<T>
         _array = arr;
     }
 
-    public Screen(T[] arr, IScreenAction[] actions)
+    public Screen(T[] arr, IScreenAction<T>[] actions)
     {
         _array = arr;
         _actions = actions;
@@ -155,7 +130,7 @@ class Screen<T>
     {
         get
         {
-            string[] sorting = Array.ConvertAll<IScreenAction, string>(_actions, x => x.MenuOption.ToString());
+            string[] sorting = Array.ConvertAll<IScreenAction<T>, string>(_actions, x => x.MenuOption.ToString());
             return menu + String.Join("\n    ", sorting);
         }
     }
@@ -190,19 +165,13 @@ class Screen<T>
                 case (ConsoleKey.E):
                     return;
                 default:
-                    IScreenAction? action = _actions.FirstOrDefault<IScreenAction>(
+                    IScreenAction<T>? action = _actions.FirstOrDefault<IScreenAction<T>>(
                         x => x.Key == key
                     );
-                    if (action is ISelector<T>)
-                    {
-                        MethodInfo method = typeof(Screen<T>).GetMethod("Select");
-                        MethodInfo genericMethod = method.MakeGenericMethod(((ISelector<T>)action).SelectorParameterType);
-                        genericMethod.Invoke(this, new object[] {(ISelector<T>)action});
+                    if (!(action is null)) {
+                        HandleAction(action);
                     }
-                    else if (action is SortingOption<T>)
-                    {
-                        PrintSorted(((SortingOption<T>)action).Comparer);
-                    }
+                    
                     else{
                         Console.WriteLine("Invalid Input.");
                     }
