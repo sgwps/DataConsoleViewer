@@ -2,6 +2,8 @@ namespace DataConsoleViewer.ScreenActions.Selection;
 
 class SelectingAction<ElementType, ParamType> : IScreenAction<ElementType>
 {
+    Func<string, Tuple<bool, ParamType>> InputConverter;
+
     public MenuOption MenuOption
     {
         get;
@@ -12,32 +14,25 @@ class SelectingAction<ElementType, ParamType> : IScreenAction<ElementType>
 
     public ElementType[] HandleData (in ElementType[] array)
     {
-        Selector<ElementType, ParamType> selector = ConsoleDialogue();
+        ParamType parameters = InputParser.GetParamType<ParamType>(InputConverter, _instruction);
+        
+        Selector<ElementType, ParamType> selector = new Selector<ElementType, ParamType>(parameters, _predicate);
         return array.Where<ElementType>(selector.ItemChecker).ToArray<ElementType>();
-    }
-
-    public virtual Selector<ElementType, ParamType> ConsoleDialogue(){
-        Console.Write($"{_instruction}: ");
-        String input = Console.ReadLine();
-        Selector<ElementType, ParamType> selector = new Selector<ElementType, ParamType>(_converter(input), _predicate);
-        Console.Clear();
-        return selector;
     }
 
     private Func<ElementType, ParamType, bool> _predicate;
 
-    private Func<string, ParamType> _converter;
 
     public SelectingAction(
         Func<ElementType, ParamType, bool> predicate,
-        Func<string, ParamType> converter,
+        Func<string, Tuple<bool, ParamType>> converter,
         MenuOption menuOption,
         string instruction
     )
     
     {
         _predicate = predicate;
-        _converter = converter;
+        InputConverter = converter;
         MenuOption = menuOption;
         _instruction = instruction;
     }

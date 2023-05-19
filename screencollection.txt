@@ -1,0 +1,63 @@
+    /// <param name="arr">Список объектов для работы в консоли</param>
+    public Screen(T[] arr)
+    {
+        _array = arr;
+    }
+
+    public Screen(T[] arr, IScreenAction<T>[] actions)
+    {
+        _array = arr;
+        _actions = actions;
+    }
+
+    /// <summary>
+    /// Первый объект, выводящийся на экран
+    /// <summary/>
+    int _first = 0;
+    int First
+    {
+        get { return _first; }
+        set
+        {
+            if (!(value < 0 || value >= _array.Length))
+                _first = value;
+        }
+    }
+
+    /// <summary>
+    /// Количество объектов, выводящихся на экран
+    /// <summary/>
+    int _len
+    {
+        get { return Console.WindowHeight - 5 - _actions.Length - 3; }
+    }
+
+    /// <summary>
+    /// Индекс, до которого объекты выводятся на экран
+    /// <summary/>
+    int ScreenEnd
+    {
+        get { return Math.Min(First + _len, _array.Length); }
+    }
+
+    /// <summary>
+    /// Флаг, показывающий, есть ли объекты ниже последнего выведенного
+    /// <summary/>
+    bool EndFlag
+    {
+        get { return First + _len >= _array.Length; }
+    }
+
+    /// <summary>
+    /// Вывод объектов на экран
+    /// <summary/>
+    void Print()
+    {
+        for (int i = _first; i < ScreenEnd; i++)
+        {
+            Console.WriteLine(_array[i]);
+        }
+        if (EndFlag)
+        {
+            Console.WriteLine("You reached the end of the file");
+        }
