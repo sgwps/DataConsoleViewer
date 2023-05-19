@@ -55,7 +55,7 @@ class Screen<T>
         }
         catch (IOException)
         {
-            Console.WriteLine("Eccor occured. File not writter");
+            Console.WriteLine("Error occured. File not writter");
             Console.Write("Enter a to try again, enter any key to exit file writer");
             if (Console.ReadKey().Key == ConsoleKey.A)
                 Upload();
@@ -101,10 +101,10 @@ class Screen<T>
             {
                 case (ConsoleKey.S):
                     Scroll(1);
-                    break;
+                    continue;
                 case (ConsoleKey.T):
                     Scroll(-1);
-                    break;
+                    continue;
                 case (ConsoleKey.U):
                     Upload();
                     break;

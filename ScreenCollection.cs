@@ -32,7 +32,7 @@ class ScreenCollection<T> {
 
     public void PrintData(){
         for (int i = First; i < ScreenEnd; ++i) {
-            Console.WriteLine($"{i + 1}. {i}");
+            Console.WriteLine($"{i + 1}. {Data[i]}");
         }
         if (EndFlag)
         {
