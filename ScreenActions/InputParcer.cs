@@ -3,7 +3,7 @@ namespace DataConsoleViewer.ScreenActions;
 static class InputParser {
     public static bool GetBoolInput(string instruction){
         Func<string, Tuple<bool, bool>> converter = (input) => {
-            switch (input) {
+            switch (input.ToUpper()) {
                 case("Y"):
                     return new Tuple<bool, bool>(true, true);
                 case("N"):

@@ -19,8 +19,8 @@ class RangeSelectionAction<ElementType, ParamType> : IScreenAction<ElementType> 
     }
 
     public (bool, bool) GetBorderIncludedInput(){
-        bool min = InputParser.GetBoolInput("Do ypu want to include minimal border in range? y/n");
-        bool max = InputParser.GetBoolInput("Do ypu want to include minimal border in range? y/n");
+        bool min = InputParser.GetBoolInput("Do you want to include minimal border in range? y/n");
+        bool max = InputParser.GetBoolInput("Do you want to include maximal border in range? y/n");
         return (min, max);
     }
 
@@ -31,8 +31,11 @@ class RangeSelectionAction<ElementType, ParamType> : IScreenAction<ElementType> 
 
     }
 
-    public RangeSelectionAction(MenuOption menuOption, Func<string, Tuple<bool, ParamType>> inputConverter) {
+    public RangeSelectionAction(MenuOption menuOption, Func<string, Tuple<bool, ParamType>> inputConverter, string instructionMin, string instructionMax, Func<ElementType, ParamType> parameterGetter) {
         MenuOption = menuOption;
-        inputConverter = inputConverter;
+        InputConverter = inputConverter;
+        _instructionMin = instructionMin;
+        _instructionMax = instructionMax;
+        ParameterGetter = parameterGetter;
     }
 }

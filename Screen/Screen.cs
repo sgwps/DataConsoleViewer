@@ -22,6 +22,7 @@ class Screen<T>
 
     public void HandleAction(IScreenAction<T> action)
     {
+        Console.Clear();
         try
         {
             T[] newArray = action.HandleData(Data.Data);
@@ -66,7 +67,7 @@ class Screen<T>
         @"
     Enter s to scroll;
     Enter t to scroll up;
-    Enter a to upload all data on the screen;
+    Enter u to upload data to json;
     Enter e to exit;
     ";
 
