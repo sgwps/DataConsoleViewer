@@ -21,7 +21,7 @@ class RangeSelector<ElementType, ParamType> where ParamType : IComparable<ParamT
             maxOk = param.CompareTo(_maxValue) <= 0;
         }
         else {
-            minOk = param.CompareTo(_maxValue) < 0;
+            maxOk = param.CompareTo(_maxValue) < 0;
         }
         return minOk && maxOk;
     }

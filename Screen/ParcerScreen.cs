@@ -2,6 +2,9 @@ using DataConsoleViewer.CSVParser;
 
 static class ParserScreen<T>
 {
+    /// <summary>
+    /// Реализует диалог с пользователем для чтения данных из файла
+    /// </summary>
     public static T[] Parse(CSVParser<T> parser)
     {
         Console.Write("Enter file name: ");

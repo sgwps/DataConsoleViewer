@@ -1,5 +1,8 @@
 namespace DataConsoleViewer.ScreenActions;
 
+/// <summary>
+/// Реализует консольный интерфейс для считывания данных от пользователя
+/// </summary>
 static class InputParser {
     public static bool GetBoolInput(string instruction){
         Func<string, Tuple<bool, bool>> converter = (input) => {

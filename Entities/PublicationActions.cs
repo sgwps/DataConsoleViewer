@@ -6,6 +6,10 @@ using DataConsoleViewer.ScreenActions.Sorting;
 namespace DataConsoleViewer.Entities;
 
 static class PublicationActions{
+
+    /// <summary>
+    /// Описание команд, выводимое на экран
+    /// </summary>
     static public string[] instructions = {
         "sort by date",
         "sort by name",
@@ -15,6 +19,9 @@ static class PublicationActions{
     };
 
 
+    /// <summary>
+    /// Клавиши для вызова команд
+    /// </summary>
     static public ConsoleKey[] keys = {
         ConsoleKey.D,
         ConsoleKey.N,
@@ -37,7 +44,10 @@ static class PublicationActions{
         SetMenuOptions();
     }
 
-     static public IScreenAction<Publication>[] GetActionArray(){
+    /// <summary>
+    /// Получение действий с массивом данных типа Publication
+    /// </summary>
+    static public IScreenAction<Publication>[] GetActionArray(){
         return new IScreenAction<Publication>[]{
             new SortingAction<Publication>(PublicationOperations.CompareByDate, options[0]),
             new SortingAction<Publication>(PublicationOperations.CompareByName, options[1]),

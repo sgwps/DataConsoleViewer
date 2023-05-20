@@ -4,8 +4,13 @@ using DataConsoleViewer.ScreenActions;
 
 namespace DataConsoleViewer.Screen;
 
+
 class Screen<T>
 {
+    /// <summary>
+    /// Список действий для работы с данными
+    /// </summary>
+    /// <value></value>
     IScreenAction<T>[] _actions = new IScreenAction<T>[] { };
 
     /// <summary>
@@ -20,6 +25,9 @@ class Screen<T>
         _actions = actions;
     }
 
+    /// <summary>
+    /// Обработка действия. После выполнения запускается экран с другими данными, при выходе из которого пользователь возвращается к текущим
+    /// </summary>
     public void HandleAction(IScreenAction<T> action)
     {
         Console.Clear();
@@ -35,7 +43,7 @@ class Screen<T>
     }
 
     /// <summary>
-    /// Пролистывание объектов
+    /// Реализация скроллинга
     /// <summary/>
     void Scroll(int count)
     {
@@ -43,7 +51,7 @@ class Screen<T>
     }
 
     /// <summary>
-    /// Выгрузка в JSON
+    /// Выгрузка данных в JSON
     /// <summary/>
     void Upload()
     {
@@ -72,7 +80,7 @@ class Screen<T>
     ";
 
     /// <summary>
-    /// Пользовательское меню в консоли
+    /// Пользовательское меню с командами
     /// <summary/>
     string Menu
     {
@@ -87,7 +95,7 @@ class Screen<T>
     }
 
     /// <summary>
-    /// Цикл работы с программой
+    /// Цикл обработки команд от пользователя
     /// <summary/>
     public void Iterate()
     {

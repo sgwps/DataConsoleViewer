@@ -1,5 +1,8 @@
 namespace DataConsoleViewer.ScreenActions;
 
+/// <summary>
+/// Переводит строки в необходимые типы данных
+/// </summary>
 static class InputConverters
 {
     public static Tuple<bool, string> ParseStringInput(string value)

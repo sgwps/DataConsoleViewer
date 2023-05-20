@@ -1,6 +1,9 @@
 
 namespace DataConsoleViewer.Entities;
 
+/// <summary>
+/// Статические действия, для совершения операций при работе с данными типа Publication
+/// </summary>
 static class PublicationOperations{
     public static int CompareByDate(Publication a, Publication b) {
         return a.Date.CompareTo(b.Date);
